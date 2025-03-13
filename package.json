@@ -27,8 +27,10 @@
     "react-native-screens": "^3.27.0",
     "react-native-sound": "^0.11.2",
     "react-native-vector-icons": "^10.2.0",
+    "react-native-webview": "^13.13.4",
     "react-redux": "^9.2.0",
-    "rn-fetch-blob": "^0.12.0"
+    "rn-fetch-blob": "^0.12.0",
+    "tone": "^15.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

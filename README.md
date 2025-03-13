@@ -1,13 +1,6 @@
-# Restaurant Mobile App
+# Karaoke Mobile App
 
-A React Native mobile application for food ordering with multiple screens and features.
-
-## Features
-
-- **Login Screen**: User authentication interface
-- **Home Screen**: Listing of Events.
-- **Event Details**: Event Details mentioned in the specified screen
-- **Select Seats**: Choose your seats and pay accordingly.
+A React Native mobile application.
 
 ## Installation
 
@@ -19,7 +12,6 @@ cd karaokeapp
 2. Install dependencies (using force due to potential version conflicts):
 
 npm i --force
-
 
 ## Running the Application
 
@@ -41,3 +33,4 @@ npm run android
 
 ## Development Status
 
+Added the Picth Adjustment module in Android native code but currenly it is in developerment.

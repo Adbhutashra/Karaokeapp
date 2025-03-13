@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addFavorite, removeFavorite, loadFavorites } from '../redux/slices/favoritesSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,17 +25,17 @@ const HomeScreen = () => {
   };
 
   return (
-    <View style={{ alignItems: 'center' }}>
-      <Text>Favorites</Text>
-      <Button style={{}} onPress={handleAddFavorite} textStyle={{}}>
+    <View style={{ alignItems: 'center', backgroundColor: 'black',paddingTop:20 }}>
+      <Text style={styles.txt}>Favorites</Text>
+      <Button style={styles.btn} onPress={handleAddFavorite} textStyle={styles.txt}>
         Add 'Shape of You' to Favorites
       </Button>
       <FlatList
         data={favorites}
         renderItem={({ item }) => (
           <View>
-            <Text>{item.title} by {item.artist}</Text>
-            <Button style={{}} onPress={() => handleRemoveFavorite(item)} textStyle={{}}>
+            <Text style={styles.txt}>{item.title} by {item.artist}</Text>
+            <Button style={styles.btn} onPress={() => handleRemoveFavorite(item)} textStyle={styles.txt}>
               Remove
             </Button>
           </View>
@@ -45,5 +45,18 @@ const HomeScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  btn: {
+    borderColor: 'white',
+    borderWidth: 1,
+},
+txt: {
+    color: 'white',
+    fontSize: 14,
+    marginHorizontal: 8,
+    marginVertical: 4,
+},
+});
 
 export default HomeScreen;

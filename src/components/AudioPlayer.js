@@ -6,7 +6,7 @@ import AudioRecorderPlayer, {
     AudioSourceAndroidType,
     OutputFormatAndroidType,
 } from 'react-native-audio-recorder-player';
-import { Dimensions, PermissionsAndroid, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, PermissionsAndroid, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View, NativeModules } from 'react-native';
 import Button from './Button';
 import RNFetchBlob from 'rn-fetch-blob';
 import Sound from 'react-native-sound';
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
 
 const screenWidth = Dimensions.get('screen').width;
 const audioRecorderPlayer = new AudioRecorderPlayer();
+const { AudioTrackModule } = NativeModules;
 
 const AudioPlayer = () => {
     const [recordSecs, setRecordSecs] = useState(0);
@@ -100,6 +101,7 @@ const AudioPlayer = () => {
     const [playTime, setPlayTime] = useState('00:00:00');
     const [duration, setDuration] = useState('00:00:00');
     const [backgroundMusic, setBackgroundMusic] = useState(null);
+    console.log(NativeModules.AudioTrackModule);
 
     const dirs = RNFetchBlob.fs.dirs;
     const path = Platform.select({
@@ -246,6 +248,24 @@ const AudioPlayer = () => {
         audioRecorderPlayer.removePlayBackListener();
     };
 
+    const handlePitchShift = () => {
+        try {
+        const semitoneShift = 2;
+        const pitchFactor = Math.pow(2, semitoneShift / 12);
+
+        AudioTrackModule.adjustPitchWithAudioTrack(path, pitchFactor, (error, message) => {
+            if (error) {
+                console.error('Error adjusting pitch:', error);
+            } else {
+                console.log('Pitch adjusted successfully:', message);
+            }
+        });
+        } catch (error) {
+            console.log("check error", error)
+        }
+
+    }
+
     let playWidth =
         (currentPositionSec / currentDurationSec) * (screenWidth - 56);
 
@@ -284,6 +304,13 @@ const AudioPlayer = () => {
                         Stop
                     </Button>
                 </View>
+                <Button
+                    style={[styles.btn, { marginTop: 12 }]}
+                    onPress={handlePitchShift}
+                    textStyle={styles.txt}
+                >
+                    Play Pitch Shift
+                </Button>
             </View>
             <View style={styles.viewPlayer}>
                 <TouchableOpacity style={styles.viewBarWrapper} onPress={onStatusPress}>
