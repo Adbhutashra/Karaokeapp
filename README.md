@@ -33,4 +33,4 @@ npm run android
 
 ## Development Status
 
-Added the Picth Adjustment module in Android native code but currenly it is in developerment.
+Added the Pitch Adjustment module in Android native code but currenly it is in developerment.
